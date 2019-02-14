@@ -21,23 +21,33 @@ profiles:
     build:
       artifacts:
       - image: builder-base-image-yum
-        context: builder-base-images
+        context: base-images
         docker:
           dockerfile: Dockerfile.yum
           buildArgs:
             FROM_IMAGE: "centos:7"
       - image: builder-base-image-ruby
-        context: builder-base-images
+        context: base-images
         docker:
           dockerfile: Dockerfile.apt
           buildArgs:
             FROM_IMAGE: "ruby:2.5.1"
       - image: builder-base-image-swift
-        context: builder-base-images
+        context: base-images
         docker:
           dockerfile: Dockerfile.apt
           buildArgs:
             FROM_IMAGE: "swift:4.0.3"
+  - name: base
+    build:
+      artifacts:
+      - image: builder-base-base
+        context: builder-base
+        docker:
+          dockerfile: Dockerfile
+          buildArgs:
+            FROM_IMAGE: jenkinsxio/builder-base-image-yum
+            FROM_VERSION: 1
   - name: nodejs
     build:
       artifacts:
@@ -47,7 +57,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             NODE_VERSION: "11.x"
   - name: nodejs8x
     build:
@@ -58,7 +68,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             NODE_VERSION: "8.x"
   - name: nodejs10x
     build:
@@ -69,7 +79,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             NODE_VERSION: "10.x"
   - name: gradle
     build:
@@ -80,7 +90,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             GRADLE_VERSION: "4.6"
   - name: gradle4
     build:
@@ -91,7 +101,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             GRADLE_VERSION: "4.10.3"
   - name: gradle5
     build:
@@ -102,7 +112,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
             GRADLE_VERSION: "5.1"
   - name: dotnet
     build:
@@ -113,7 +123,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: maven-java11
     build:
       artifacts:
@@ -123,7 +133,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: maven-nodejs
     build:
       artifacts:
@@ -133,7 +143,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-maven-java11
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: aws-cdk
     build:
       artifacts:
@@ -143,7 +153,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-maven-nodejs
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: dlang
     build:
       artifacts:
@@ -153,7 +163,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: rust
     build:
       artifacts:
@@ -163,7 +173,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: go
     build:
       artifacts:
@@ -173,7 +183,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: go-maven
     build:
       artifacts:
@@ -183,7 +193,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-maven-32-base
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: maven
     build:
       artifacts:
@@ -193,7 +203,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: maven-32
     build:
       artifacts:
@@ -203,7 +213,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-maven-base
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: newman
     build:
       artifacts:
@@ -213,7 +223,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-nodejs-base
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: python
     build:
       artifacts:
@@ -223,7 +233,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: python2
     build:
       artifacts:
@@ -233,7 +243,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: python37
     build:
       artifacts:
@@ -243,7 +253,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: scala
     build:
       artifacts:
@@ -253,7 +263,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: terraform
     build:
       artifacts:
@@ -263,7 +273,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-yum
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: swift
     build:
       artifacts:
@@ -273,7 +283,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-swift
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
   - name: ruby
     build:
       artifacts:
@@ -283,7 +293,7 @@ profiles:
           dockerfile: Dockerfile
           buildArgs:
             FROM_IMAGE: jenkinsxio/builder-base-image-ruby
-            FROM_VERSION: "0.1.0"
+            FROM_VERSION: 1
 deploy:
   kubectl:
     manifests:

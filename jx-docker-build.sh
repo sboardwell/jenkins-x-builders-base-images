@@ -41,18 +41,18 @@ export CACHE=""
 export DOCKER_REGISTRY=docker.io
 
 ## set the current values
-sed -i '' "s/DOCKER_ORG:.*/DOCKER_ORG: ${DOCKER_ORG}/g" skaffold.yaml
+sed -i '' -e "s/FROM_IMAGE:\(.*\)\/builder-\(.*\)/FROM_IMAGE: ${DOCKER_ORG}\/builder-\2/g" skaffold.yaml
 sed -i '' "s/FROM_VERSION:.*/FROM_VERSION: ${VERSION}/g" skaffold.yaml
 
 retry 3 skaffold build -f skaffold.yaml -p base-images 
 
 ## newman depends on nodejs (amongst others), so order is important
-BUILDERS="dlang maven maven-32 maven-java11 maven-nodejs go go-maven gradle gradle4 gradle5 nodejs nodejs8x nodejs10x newman aws-cdk python python2 python37 rust scala terraform swift ruby"
+BUILDERS="base swift ruby dlang maven maven-32 maven-java11 maven-nodejs go go-maven gradle gradle4 gradle5 nodejs nodejs8x nodejs10x newman aws-cdk python python2 python37 rust scala terraform"
 BROKEN="dotnet"
 ## now loop through the above array
 UPDATEBOT_PUSH_STR=""
 for i in $BUILDERS; do
-  UPDATEBOT_PUSH_STR="${UPDATEBOT_PUSH_STR} jenkinsxio/${i} ${VERSION}"
+  UPDATEBOT_PUSH_STR="${UPDATEBOT_PUSH_STR} jenkinsxio/${i}-base ${VERSION}"
 done
 
 
