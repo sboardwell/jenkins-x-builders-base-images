@@ -9,7 +9,7 @@ RUN yum -y install gcc openssl-devel bzip2-devel libffi-devel \
 
 RUN cd /usr/src && \
     wget -q https://www.python.org/ftp/python/${PYTHONVERSION}/Python-${PYTHONVERSION}.tgz && \
-    tar qxzf Python-${PYTHONVERSION}.tgz && \
+    tar xzf Python-${PYTHONVERSION}.tgz && \
     cd Python-${PYTHONVERSION} && \
     ./configure --enable-optimizations && \
     make altinstall && \
