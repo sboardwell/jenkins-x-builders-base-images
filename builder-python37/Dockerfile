@@ -19,6 +19,6 @@ RUN cd /usr/src && \
 
 RUN ln -s /usr/local/bin/python3.7 /usr/bin/python3
 RUN yum -y remove gcc openssl-devel bzip2-devel \
-    yum clean all
+    && yum clean all
 
 CMD ["python3", "--version"]
