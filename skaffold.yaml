@@ -142,7 +142,7 @@ profiles:
         docker:
           dockerfile: Dockerfile
           buildArgs:
-            FROM_IMAGE: jenkinsxio/builder-maven-java11
+            FROM_IMAGE: jenkinsxio/builder-maven-java11-base
             FROM_VERSION: 1
   - name: aws-cdk
     build:
@@ -152,7 +152,7 @@ profiles:
         docker:
           dockerfile: Dockerfile
           buildArgs:
-            FROM_IMAGE: jenkinsxio/builder-maven-nodejs
+            FROM_IMAGE: jenkinsxio/builder-maven-nodejs-base
             FROM_VERSION: 1
   - name: dlang
     build:
